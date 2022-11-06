@@ -18,21 +18,23 @@ class MyApp1 extends StatefulWidget {
 
 class _MyAppState extends State<MyApp1> {
   //const MyApp({Key? key}) : super(key: key);
+  List<dynamic> _users = [];
+  Future loadUserList() async {
+    var res = await http.get(Uri.https("dummyjson.com", "users"));
+    if (res.statusCode == 200) {
+      var jsonData = jsonDecode(res.body);
+      if (jsonData['users'].isNotEmpty) {
+        setState(() {
+          _users = jsonData['users'];
+        });
+      }
+    }
+  }
+
   @override
   int noOfItems = 1;
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
-    Future getUserData() async {
-      var response =
-          await http.get(Uri.https('jsonplaceholder.typicode.com', 'users'));
-      var jsonData = jsonDecode(response.body);
-      List<User> users = [];
-      for (var u in jsonData) {
-        User user = User(u['name']);
-        users.add(user);
-      }
-      print(users.length);
-    }
 
     return Scaffold(
       resizeToAvoidBottomInset: false,
@@ -139,9 +141,9 @@ class _MyAppState extends State<MyApp1> {
                 child: Container(
                   child: Card(
                     child: FutureBuilder(
-                        future: getUserData(),
+                        future: loadUserList(),
                         builder: (context, snapshot) {
-                          if (snapshot.data == null) {
+                          if (_users.length == null) {
                             return Container(
                               child: Center(
                                 child: Text("loading"),
@@ -149,7 +151,7 @@ class _MyAppState extends State<MyApp1> {
                             );
                           } else {
                             return ListView.builder(
-                              itemCount: snapshot.data.length,
+                              itemCount: _users.length,
                               itemBuilder: (context, i) {
                                 return ListTile(
                                   leading: Icon(Icons.image),
@@ -207,7 +209,7 @@ class _MyAppState extends State<MyApp1> {
                                       ),
                                     ),
                                   ),
-                                  title: Text(snapshot.data[i].name),
+                                  title: Text(_users[i]['firstName']),
                                   subtitle: Text('Quantity\nPrice'),
                                   isThreeLine: true,
                                   onTap: () {},
@@ -259,7 +261,7 @@ class _MyAppState extends State<MyApp1> {
                                       context,
                                       MaterialPageRoute(
                                           builder: (context) => placeorder()));
-                                  getUserData();
+                                  loadUserList();
                                 },
                               ),
                             ),
