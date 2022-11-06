@@ -31,17 +31,28 @@ class Home1 extends StatefulWidget {
 }
 
 class _Home1State extends State<Home1> {
-  bool _loading = false;
   List<dynamic> _users = [];
+  Future loadUserList() async {
+    var res = await http.get(Uri.https("dummyjson.com", "users"));
+    if (res.statusCode == 200) {
+      var jsonData = jsonDecode(res.body);
+      if (jsonData['users'].isNotEmpty) {
+        setState(() {
+          _users = jsonData['users'];
+        });
+      }
+    }
+  }
+
   int _counter = 0;
   @override
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
-    // This method is rerun every time setState is called, for instance as done
+    loadUserList();
+    // This method is rerun every time setState is called, for instance as done.
     // by the _incrementCounter method above.
-    //
-    // The Flutter framework has been optimized to make rerunning build methods
-    // fast, so that you can just rebuild anything that needs updating rather
+    // The Flutter framework has been optimized to make rerunning build methods.
+    // fast, so that you can just rebuild anything that needs updating rather.
     // than having to individually change instances of widgets.
     return Scaffold(
       resizeToAvoidBottomInset: false,
@@ -105,43 +116,35 @@ class _Home1State extends State<Home1> {
           ],
         ),
       ),
-      body: _users.isNotEmpty
-          ? ListView.builder(
-              itemCount: _users.length,
-              itemBuilder: ((context, index) {
-                return Card(
-                  margin: const EdgeInsets.symmetric(
-                    horizontal: 15.0,
-                    vertical: 10.0,
-                  ),
-                  child: Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Row(
-                      children: [
-                        Image.network(_users[index]['image']),
-                        Column(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(_users[index]['firstName']),
-                            Text(_users[index]['email']),
-                            Text(_users[index]['phone']),
-                          ],
-                        )
-                      ],
-                    ),
-                  ),
-                );
-              }),
-            )
-          : Center(
-              child: _loading
-                  ? CircularProgressIndicator()
-                  : ElevatedButton(
-                      child: const Text("View Category"),
-                      onPressed: loadUserList,
-                    ),
+      body: ListView.builder(
+        itemCount: _users.length,
+        itemBuilder: ((context, index) {
+          return Card(
+            margin: const EdgeInsets.symmetric(
+              horizontal: 15.0,
+              vertical: 10.0,
             ),
+            child: Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Row(
+                children: [
+                  Image.network(_users[index]['image']),
+                  Column(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(_users[index]['firstName']),
+                      Text(_users[index]['email']),
+                      Text(_users[index]['phone']),
+                    ],
+                  )
+                ],
+              ),
+            ),
+          );
+        }),
+      ),
+
       bottomNavigationBar: Container(
         height: 60,
         decoration: BoxDecoration(
@@ -222,21 +225,5 @@ class _Home1State extends State<Home1> {
       ),
       // This trailing comma makes auto-formatting nicer for build methods.
     );
-  }
-
-  loadUserList() async {
-    setState(() {
-      _loading = true;
-    });
-    var res = await http.get(Uri.https("dummyjson.com", "users"));
-    if (res.statusCode == 200) {
-      var jsonData = jsonDecode(res.body);
-      if (jsonData['users'].isNotEmpty) {
-        setState(() {
-          _users = jsonData['users'];
-          _loading = false;
-        });
-      }
-    }
   }
 }
