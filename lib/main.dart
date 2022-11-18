@@ -43,7 +43,7 @@ class profile extends StatelessWidget {
                   children: [
                     SizedBox(
                       width: MediaQuery.of(context).size.width,
-                      height: 80,
+                      height: 120,
                     ),
                     Row(
                       children: [
@@ -451,28 +451,40 @@ class profile extends StatelessWidget {
       //   ),
       // ),
       bottomNavigationBar: Container(
-        height: 60,
+        height: 70,
         decoration: BoxDecoration(
           color: Colors.white,
+          border: Border.all(color: Colors.grey),
+          boxShadow: [
+            BoxShadow(
+              color: Colors.black,
+            ),
+          ],
         ),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
             Padding(
-                padding: EdgeInsets.all(4),
-                child: Column(children: [
-                  Icon(Icons.widgets_outlined, color: Colors.black),
-                  SizedBox(
-                    height: 10,
-                  ),
-                  Text("home",
-                      style: TextStyle(
-                        color: Colors.black,
-                        fontWeight: FontWeight.bold,
-                      ))
-                ])),
+              padding: EdgeInsets.all(0.5),
+              child: TextButton(
+                  onPressed: () {
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) => profile()));
+                  },
+                  child: Column(children: [
+                    Icon(Icons.widgets_outlined, color: Colors.black),
+                    SizedBox(
+                      height: 10,
+                    ),
+                    Text("home",
+                        style: TextStyle(
+                          color: Colors.black,
+                          fontWeight: FontWeight.bold,
+                        ))
+                  ])),
+            ),
             Padding(
-                padding: EdgeInsets.all(4),
+                padding: EdgeInsets.all(1.0),
                 child: TextButton(
                     onPressed: () {
                       Navigator.push(context,
@@ -490,11 +502,11 @@ class profile extends StatelessWidget {
                           ))
                     ]))),
             Padding(
-                padding: EdgeInsets.all(4),
+                padding: EdgeInsets.all(1.0),
                 child: TextButton(
                     onPressed: () {
                       Navigator.push(context,
-                          MaterialPageRoute(builder: (context) => MyApp()));
+                          MaterialPageRoute(builder: (context) => profile()));
                     },
                     child: Column(children: [
                       Icon(Icons.person_pin, color: Colors.black),
@@ -508,7 +520,7 @@ class profile extends StatelessWidget {
                           ))
                     ]))),
             Padding(
-                padding: EdgeInsets.all(4),
+                padding: EdgeInsets.all(1.0),
                 child: TextButton(
                     onPressed: () {
                       Navigator.push(context,

@@ -32,7 +32,6 @@ class _MyAppState extends State<MyApp1> {
   }
 
   @override
-  int noOfItems = 1;
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
 
@@ -150,11 +149,12 @@ class _MyAppState extends State<MyApp1> {
                               ),
                             );
                           } else {
+                            var noOfItems = List<int>.filled(_users.length, 0);
                             return ListView.builder(
                               itemCount: _users.length,
                               itemBuilder: (context, i) {
                                 return ListTile(
-                                  leading: Icon(Icons.image),
+                                  leading: Image.network(_users[i]['image']),
                                   trailing: Padding(
                                     padding:
                                         const EdgeInsets.fromLTRB(20, 0, 20, 0),
@@ -173,7 +173,8 @@ class _MyAppState extends State<MyApp1> {
                                               child: TextButton(
                                                 onPressed: () {
                                                   setState(() {
-                                                    noOfItems += 1;
+                                                    // noOfItems[i] += 1;
+                                                    print(1);
                                                   });
                                                 },
                                                 child: Padding(
@@ -187,7 +188,7 @@ class _MyAppState extends State<MyApp1> {
                                           ),
                                           Flexible(
                                             child: Container(
-                                              child: Text('$noOfItems'),
+                                              child: Text("1"),
                                             ),
                                           ),
                                           Flexible(
@@ -198,7 +199,7 @@ class _MyAppState extends State<MyApp1> {
                                               child: TextButton(
                                                 onPressed: () {
                                                   setState(() {
-                                                    noOfItems -= 1;
+                                                    //noOfItems[i] -= 1;
                                                   });
                                                 },
                                                 child: Text('- '),
@@ -260,7 +261,10 @@ class _MyAppState extends State<MyApp1> {
                                   Navigator.push(
                                       context,
                                       MaterialPageRoute(
-                                          builder: (context) => placeorder()));
+                                          builder: (context) => placeorder(
+                                                _users,
+                                                value: [],
+                                              )));
                                   loadUserList();
                                 },
                               ),

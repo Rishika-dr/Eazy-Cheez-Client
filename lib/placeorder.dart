@@ -1,14 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:profile/cart.dart';
 
-void main() => runApp(MaterialApp(
-      home: placeorder(),
-      debugShowCheckedModeBanner: false,
-    ));
-
 class placeorder extends StatelessWidget {
-  const placeorder({Key? key}) : super(key: key);
-
+  //const placeorder({Key? key}) : super(key: key);
+  List<dynamic> _users = [];
+  placeorder(this._users, {required List value});
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
@@ -300,7 +296,9 @@ class placeorder extends StatelessWidget {
                         color: Color.fromARGB(255, 237, 165, 9),
                       ),
                       child: TextButton(
-                        onPressed: () {},
+                        onPressed: () {
+                          print(_users);
+                        },
                         child: Text(
                           'Verify',
                           style: TextStyle(
