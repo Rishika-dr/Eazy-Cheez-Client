@@ -42,7 +42,7 @@ class _MyAppState extends State<MyApp1> {
           icon: Icon(Icons.arrow_back_ios),
           onPressed: () {
             Navigator.push(
-                context, MaterialPageRoute(builder: (context) => MyApp()));
+                context, MaterialPageRoute(builder: (context) => MyApp1()));
           },
         ),
         title: Text('Cart'),

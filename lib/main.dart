@@ -1,33 +1,73 @@
+import 'dart:convert';
+import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:profile/cart.dart';
+import 'package:http/http.dart' as http;
 import 'package:profile/category.dart';
 import 'package:profile/editprofile.dart';
 import 'package:profile/editprofile.dart';
 
-void main() {
-  runApp(MyApp());
-}
-
-class MyApp extends StatelessWidget {
-  MyApp({Key? key}) : super(key: key);
-  // This widget is the root of your application.
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
+void main() => runApp(MaterialApp(
       home: profile(),
-      debugShowCheckedModeBanner: false,
-    );
-  }
+    ));
+
+class profile extends StatefulWidget {
+  @override
+  State<profile> createState() => _MyAppState1();
 }
 
-class profile extends StatelessWidget {
-  profile({super.key});
+class _MyAppState1 extends State<profile> {
+  var url = Uri.parse('http://localhost:8000/api/profile');
+  // var headers = {
+  //   "authtoken":
+  //       "eyJhbGciOiJSUzI1NiIsImtpZCI6ImY4MDljZmYxMTZlNWJhNzQwNzQ1YmZlZGE1OGUxNmU4MmYzZmQ4MDUiLCJ0eXAiOiJKV1QifQ.eyJpc3MiOiJodHRwczovL3NlY3VyZXRva2VuLmdvb2dsZS5jb20vcGhvbmUtZmlyZWJhc2UtZTZhZTAiLCJhdWQiOiJwaG9uZS1maXJlYmFzZS1lNmFlMCIsImF1dGhfdGltZSI6MTY2ODcwMDA5NCwidXNlcl9pZCI6ImVRb1g3U2FUN1ZoQllobkU1RXlVVmtPMEl6bjEiLCJzdWIiOiJlUW9YN1NhVDdWaEJZaG5FNUV5VVZrTzBJem4xIiwiaWF0IjoxNjY4NzAwMDk0LCJleHAiOjE2Njg3MDM2OTQsInBob25lX251bWJlciI6Iis5MTkxMTA2Nzg4MzEiLCJmaXJlYmFzZSI6eyJpZGVudGl0aWVzIjp7InBob25lIjpbIis5MTkxMTA2Nzg4MzEiXX0sInNpZ25faW5fcHJvdmlkZXIiOiJwaG9uZSJ9fQ.BMEPDJDNxVe5OeSexi674xAg-4B5xWZrHMMg0tT2ipeyUJkhtTwqdHsyu1sr0vzXsa7L_QJTe_CiY8egrlgAZkYT9vLeXouMJpRnQUMjjZqKsoogepMgV-WyiEzg9T3nMY1O2gIFqY9ebFzUY9F8-2YB-C5KqVA87kjf9bY3AcAO6vMT88O8cycP3o9SESHupsH4Bpuuh49_y1F5YOHZR1ICq1_hUdibBkltZGJAaL1JEKBVpQrDb3A9LNBue7JUfjAYaP8XAo_nvxnYmE31NnPPmDdPFHCK7cl-vEUvMnpT5EOTV0-gODDLT-OKZkgY40XpI4EoyM8W4uA5BxEQtg",
+  // };
+  //const MyApp({Key? key}) : super(key: key);
+  Future<void> getdata() async {
+    var future = await http.get(url);
+    print(future.body);
+  }
+  // Future loadUserList() async {
+  //   String url = '127.0.0.1:8000/api/profile';
+  //   var res = await http.get(Uri.http(url), headers: {
+  //     'authtoken':
+  //         'eyJhbGciOiJSUzI1NiIsImtpZCI6ImQ3YjE5MTI0MGZjZmYzMDdkYzQ3NTg1OWEyYmUzNzgzZGMxYWY4OWYiLCJ0eXAiOiJKV1QifQ.eyJpc3MiOiJodHRwczovL3NlY3VyZXRva2VuLmdvb2dsZS5jb20vcGhvbmUtZmlyZWJhc2UtZTZhZTAiLCJhdWQiOiJwaG9uZS1maXJlYmFzZS1lNmFlMCIsImF1dGhfdGltZSI6MTY2ODUzMzYwNCwidXNlcl9pZCI6ImRmQjllcjAzQ1lZVE85aUJMakhXV2Z6RlZ4ODIiLCJzdWIiOiJkZkI5ZXIwM0NZWVRPOWlCTGpIV1dmekZWeDgyIiwiaWF0IjoxNjY4NTMzNjA0LCJleHAiOjE2Njg1MzcyMDQsInBob25lX251bWJlciI6Iis5MTYzNjIwOTg2MDYiLCJmaXJlYmFzZSI6eyJpZGVudGl0aWVzIjp7InBob25lIjpbIis5MTYzNjIwOTg2MDYiXX0sInNpZ25faW5fcHJvdmlkZXIiOiJwaG9uZSJ9fQ.BMKyCpD6nDRmpeCL1jJJlk5KEl6OhkmQUBidm7xFNBXpORZUuL5anApKZuoM3vcUuo2AfVHRcfqKXHOfFDgz_LhCeo1DO5_cctRtCeo5Q8gxCOGgMd9KpY6CSA4Fd9MpbbURylG6j7vQC-rmChMVigZsM3vH-9zdot-1mTdM2OA8fKUZLi1dLMb_sMMKSkeU0Yx9vFAV2yjIHyVlTCg835_GiDG4vhVl8bp5dasiZWD3KJBwYpYmwlgANgOBTE2zjmqGguTY_hk2osPoXLFYZo1SuMXN8QvVXTzRvU5AB52aTF20y5ABn-Uwf0RBStyoCnt3cxSNLjZK65N8oqefeA'
+  //   });
+  //   if (res.statusCode == 200) {
+  //     var jsonData = jsonDecode(res.body);
+  //     print(jsonData);
+  //   } else {
+  //     print("error");
+  //   }
+  //}
 
+  // final String baseUrl = "http://127.0.0.1:8000";
+  // Future getHttp() async {
+  //   final Dio dio = new Dio();
+  //   try {
+  //     var response = await dio.get(
+  //       "$baseUrl/api/profile",
+  //       options: Options(
+  //         headers: {
+  //           "authtoken":
+  //               "eyJhbGciOiJSUzI1NiIsImtpZCI6ImY4MDljZmYxMTZlNWJhNzQwNzQ1YmZlZGE1OGUxNmU4MmYzZmQ4MDUiLCJ0eXAiOiJKV1QifQ.eyJpc3MiOiJodHRwczovL3NlY3VyZXRva2VuLmdvb2dsZS5jb20vcGhvbmUtZmlyZWJhc2UtZTZhZTAiLCJhdWQiOiJwaG9uZS1maXJlYmFzZS1lNmFlMCIsImF1dGhfdGltZSI6MTY2ODY3MjU4MCwidXNlcl9pZCI6ImVRb1g3U2FUN1ZoQllobkU1RXlVVmtPMEl6bjEiLCJzdWIiOiJlUW9YN1NhVDdWaEJZaG5FNUV5VVZrTzBJem4xIiwiaWF0IjoxNjY4NjcyNTgwLCJleHAiOjE2Njg2NzYxODAsInBob25lX251bWJlciI6Iis5MTkxMTA2Nzg4MzEiLCJmaXJlYmFzZSI6eyJpZGVudGl0aWVzIjp7InBob25lIjpbIis5MTkxMTA2Nzg4MzEiXX0sInNpZ25faW5fcHJvdmlkZXIiOiJwaG9uZSJ9fQ.CNzMb4PZWUaqsTQ-L_TCRmJuEvulsPPnBW_mcFD-kj7OuFNqLnlwYqglVSpv1tZvjEBsscFy4K-DqtY8B8nZbF26I5NgLASOQCYjZqgDC9fwCs_gXAn0CtK8X2PIiYp1bcEog85e2OkG6gWK8eVZLNPmyMl2g2DjPiQ97lhTXdx5WOQxcuKAV2fa3-ugcakPdluZ9H0PK_RabGt6mEVOs-x6onHHU5XWZGnROI3Re9PHy9EPM46MAcY_XJBfH6-JdiR_ssWdx2Lsyc75se-SFo8cyfJirodJIcJzPtOjnxc_6Tccgeo9UneQLbnggq_hjc9bC5utnKkJ2eXP8Fxdog"
+  //         },
+  //       ),
+  //     );
+  //     print(response.statusCode);
+  //     print(response.data);
+  //   } catch (e) {
+  //     print(e);
+  //   }
+  //}
+  List<dynamic> _users = [];
   var name = 'ashlesh shenoy';
   var phone = "6361284091";
   @override
   Widget build(BuildContext context) {
+    //loadUserList();
+    getdata();
     var size = MediaQuery.of(context).size;
     return Scaffold(
       resizeToAvoidBottomInset: false,
