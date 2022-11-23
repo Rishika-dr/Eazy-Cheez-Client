@@ -18,15 +18,20 @@ class profile extends StatefulWidget {
 }
 
 class _MyAppState1 extends State<profile> {
-  var url = Uri.parse('http://localhost:8000/api/profile');
-  // var headers = {
-  //   "authtoken":
-  //       "eyJhbGciOiJSUzI1NiIsImtpZCI6ImY4MDljZmYxMTZlNWJhNzQwNzQ1YmZlZGE1OGUxNmU4MmYzZmQ4MDUiLCJ0eXAiOiJKV1QifQ.eyJpc3MiOiJodHRwczovL3NlY3VyZXRva2VuLmdvb2dsZS5jb20vcGhvbmUtZmlyZWJhc2UtZTZhZTAiLCJhdWQiOiJwaG9uZS1maXJlYmFzZS1lNmFlMCIsImF1dGhfdGltZSI6MTY2ODcwMDA5NCwidXNlcl9pZCI6ImVRb1g3U2FUN1ZoQllobkU1RXlVVmtPMEl6bjEiLCJzdWIiOiJlUW9YN1NhVDdWaEJZaG5FNUV5VVZrTzBJem4xIiwiaWF0IjoxNjY4NzAwMDk0LCJleHAiOjE2Njg3MDM2OTQsInBob25lX251bWJlciI6Iis5MTkxMTA2Nzg4MzEiLCJmaXJlYmFzZSI6eyJpZGVudGl0aWVzIjp7InBob25lIjpbIis5MTkxMTA2Nzg4MzEiXX0sInNpZ25faW5fcHJvdmlkZXIiOiJwaG9uZSJ9fQ.BMEPDJDNxVe5OeSexi674xAg-4B5xWZrHMMg0tT2ipeyUJkhtTwqdHsyu1sr0vzXsa7L_QJTe_CiY8egrlgAZkYT9vLeXouMJpRnQUMjjZqKsoogepMgV-WyiEzg9T3nMY1O2gIFqY9ebFzUY9F8-2YB-C5KqVA87kjf9bY3AcAO6vMT88O8cycP3o9SESHupsH4Bpuuh49_y1F5YOHZR1ICq1_hUdibBkltZGJAaL1JEKBVpQrDb3A9LNBue7JUfjAYaP8XAo_nvxnYmE31NnPPmDdPFHCK7cl-vEUvMnpT5EOTV0-gODDLT-OKZkgY40XpI4EoyM8W4uA5BxEQtg",
-  // };
+  var name;
+  var phone;
+  var url = Uri.parse('http://192.168.9.98:8000/api/profile');
+  var headers = {
+    "authtoken":
+        "eyJhbGciOiJSUzI1NiIsImtpZCI6ImY4MDljZmYxMTZlNWJhNzQwNzQ1YmZlZGE1OGUxNmU4MmYzZmQ4MDUiLCJ0eXAiOiJKV1QifQ.eyJpc3MiOiJodHRwczovL3NlY3VyZXRva2VuLmdvb2dsZS5jb20vcGhvbmUtZmlyZWJhc2UtZTZhZTAiLCJhdWQiOiJwaG9uZS1maXJlYmFzZS1lNmFlMCIsImF1dGhfdGltZSI6MTY2OTEwODg2OCwidXNlcl9pZCI6ImVRb1g3U2FUN1ZoQllobkU1RXlVVmtPMEl6bjEiLCJzdWIiOiJlUW9YN1NhVDdWaEJZaG5FNUV5VVZrTzBJem4xIiwiaWF0IjoxNjY5MTA4ODY4LCJleHAiOjE2NjkxMTI0NjgsInBob25lX251bWJlciI6Iis5MTkxMTA2Nzg4MzEiLCJmaXJlYmFzZSI6eyJpZGVudGl0aWVzIjp7InBob25lIjpbIis5MTkxMTA2Nzg4MzEiXX0sInNpZ25faW5fcHJvdmlkZXIiOiJwaG9uZSJ9fQ.GIZIHiGng2noo8jbpq7ivK1mXqzv9Gd3yAomwmt7TGbOjpUCimPnMl4GR7QNXRUEh8fYvfitqkLStPM_TYbjEXH3fMGL4qv4lseYa5XOf5gXXxutT-QSdYsVf-Df9UhxQSFByh-UshGDTqQPOSbm7hRcLYmUky5QILo14kuFuOC-2jsJmRBv6lNW1E_2X3A8ESpOM7nZP-bp2rPwsZ9bLeYQjlrz1kriQeEg_EEjeH6Dapl6muYJO_-0UUceouhXpaoEW6cBBYwChULJHv1OTCSeGEOgO5vAI_KVdsxPg9sw8oIXbNTZwyP7ZFyOgCYuufR3eFhUrD4w9VcMvlU1Wg",
+  };
   //const MyApp({Key? key}) : super(key: key);
   Future<void> getdata() async {
-    var future = await http.get(url);
-    print(future.body);
+    var future = await http.get(url, headers: headers);
+    var responseData = json.decode(future.body);
+    print(responseData['username']);
+    name = responseData['username'];
+    phone = responseData['phone'];
   }
   // Future loadUserList() async {
   //   String url = '127.0.0.1:8000/api/profile';
@@ -62,8 +67,7 @@ class _MyAppState1 extends State<profile> {
   //   }
   //}
   List<dynamic> _users = [];
-  var name = 'ashlesh shenoy';
-  var phone = "6361284091";
+
   @override
   Widget build(BuildContext context) {
     //loadUserList();
