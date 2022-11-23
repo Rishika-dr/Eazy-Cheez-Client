@@ -19,16 +19,18 @@ class MyApp1 extends StatefulWidget {
 class _MyAppState extends State<MyApp1> {
   //const MyApp({Key? key}) : super(key: key);
   List<dynamic> _users = [];
-  Future loadUserList() async {
-    var res = await http.get(Uri.https("dummyjson.com", "users"));
-    if (res.statusCode == 200) {
-      var jsonData = jsonDecode(res.body);
-      if (jsonData['users'].isNotEmpty) {
-        setState(() {
-          _users = jsonData['users'];
-        });
-      }
-    }
+  var v;
+  var url = Uri.parse('http://192.168.43.41:8000/api/cart');
+  var headers = {
+    "authtoken":
+        "eyJhbGciOiJSUzI1NiIsImtpZCI6ImY4MDljZmYxMTZlNWJhNzQwNzQ1YmZlZGE1OGUxNmU4MmYzZmQ4MDUiLCJ0eXAiOiJKV1QifQ.eyJpc3MiOiJodHRwczovL3NlY3VyZXRva2VuLmdvb2dsZS5jb20vcGhvbmUtZmlyZWJhc2UtZTZhZTAiLCJhdWQiOiJwaG9uZS1maXJlYmFzZS1lNmFlMCIsImF1dGhfdGltZSI6MTY2OTEyOTM2MCwidXNlcl9pZCI6ImVRb1g3U2FUN1ZoQllobkU1RXlVVmtPMEl6bjEiLCJzdWIiOiJlUW9YN1NhVDdWaEJZaG5FNUV5VVZrTzBJem4xIiwiaWF0IjoxNjY5MTI5MzYwLCJleHAiOjE2NjkxMzI5NjAsInBob25lX251bWJlciI6Iis5MTkxMTA2Nzg4MzEiLCJmaXJlYmFzZSI6eyJpZGVudGl0aWVzIjp7InBob25lIjpbIis5MTkxMTA2Nzg4MzEiXX0sInNpZ25faW5fcHJvdmlkZXIiOiJwaG9uZSJ9fQ.f_JDP7yDsmFuGLZSeFuwmfGwuPhk_4xTwT7DssSFh58yAOhoxBJpnfFps0gllzcI7dPtt_YD_ygbKXQ6LeUbtDeq_00lza7fscArjD1icJ08REvGnC_ZozpZ8Y4yMZLIGX9GAwFGSa8HPtri1pRJ-CnFK-yz5h9FkD4BSfAxPrutGG52PKoUOiMhApt1uhJyd6zdL6d_4_SrOXiOzsVMM2TihK5kjioSPAIxCq_aBuE65aX7I_Yqmz6TGwxbbyasTlSDhUg4XqmXvD0qlD2DPFKHLjIqOLdnDyne3iv9TaCNHfKR7ea7sZKCSJpMqUFcNKpxIWyXJw3NMex0cmzcNw",
+  };
+  // //const MyApp({Key? key}) : super(key: key);
+  Future<void> getdata() async {
+    var future = await http.get(url, headers: headers);
+    var responseData = json.decode(future.body);
+    print(responseData['cart']);
+    _users = responseData['cart'];
   }
 
   @override
@@ -140,7 +142,7 @@ class _MyAppState extends State<MyApp1> {
                 child: Container(
                   child: Card(
                     child: FutureBuilder(
-                        future: loadUserList(),
+                        future: getdata(),
                         builder: (context, snapshot) {
                           if (_users.length == null) {
                             return Container(
@@ -154,7 +156,7 @@ class _MyAppState extends State<MyApp1> {
                               itemCount: _users.length,
                               itemBuilder: (context, i) {
                                 return ListTile(
-                                  leading: Image.network(_users[i]['image']),
+                                  leading: Icon(Icons.image),
                                   trailing: Padding(
                                     padding:
                                         const EdgeInsets.fromLTRB(20, 0, 20, 0),
@@ -210,8 +212,8 @@ class _MyAppState extends State<MyApp1> {
                                       ),
                                     ),
                                   ),
-                                  title: Text(_users[i]['firstName']),
-                                  subtitle: Text('Quantity\nPrice'),
+                                  title: Text(_users[i]['name']),
+                                  subtitle: Text("Quantity\nPrice"),
                                   isThreeLine: true,
                                   onTap: () {},
                                   onLongPress: () {},
@@ -265,7 +267,7 @@ class _MyAppState extends State<MyApp1> {
                                                 _users,
                                                 value: [],
                                               )));
-                                  loadUserList();
+                                  getdata();
                                 },
                               ),
                             ),
@@ -291,6 +293,7 @@ class _MyAppState extends State<MyApp1> {
   }
 }
 
+// this code belongs to rasika anchan,senior developer of eazycheez<--->>>>
 class User {
   final String name;
   User(this.name);

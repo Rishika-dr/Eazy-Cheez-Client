@@ -20,16 +20,16 @@ class profile extends StatefulWidget {
 class _MyAppState1 extends State<profile> {
   var name;
   var phone;
-  var url = Uri.parse('http://192.168.9.98:8000/api/profile');
+  var url = Uri.parse('http://192.168.43.41:8000/api/profile');
   var headers = {
     "authtoken":
-        "eyJhbGciOiJSUzI1NiIsImtpZCI6ImY4MDljZmYxMTZlNWJhNzQwNzQ1YmZlZGE1OGUxNmU4MmYzZmQ4MDUiLCJ0eXAiOiJKV1QifQ.eyJpc3MiOiJodHRwczovL3NlY3VyZXRva2VuLmdvb2dsZS5jb20vcGhvbmUtZmlyZWJhc2UtZTZhZTAiLCJhdWQiOiJwaG9uZS1maXJlYmFzZS1lNmFlMCIsImF1dGhfdGltZSI6MTY2OTEwODg2OCwidXNlcl9pZCI6ImVRb1g3U2FUN1ZoQllobkU1RXlVVmtPMEl6bjEiLCJzdWIiOiJlUW9YN1NhVDdWaEJZaG5FNUV5VVZrTzBJem4xIiwiaWF0IjoxNjY5MTA4ODY4LCJleHAiOjE2NjkxMTI0NjgsInBob25lX251bWJlciI6Iis5MTkxMTA2Nzg4MzEiLCJmaXJlYmFzZSI6eyJpZGVudGl0aWVzIjp7InBob25lIjpbIis5MTkxMTA2Nzg4MzEiXX0sInNpZ25faW5fcHJvdmlkZXIiOiJwaG9uZSJ9fQ.GIZIHiGng2noo8jbpq7ivK1mXqzv9Gd3yAomwmt7TGbOjpUCimPnMl4GR7QNXRUEh8fYvfitqkLStPM_TYbjEXH3fMGL4qv4lseYa5XOf5gXXxutT-QSdYsVf-Df9UhxQSFByh-UshGDTqQPOSbm7hRcLYmUky5QILo14kuFuOC-2jsJmRBv6lNW1E_2X3A8ESpOM7nZP-bp2rPwsZ9bLeYQjlrz1kriQeEg_EEjeH6Dapl6muYJO_-0UUceouhXpaoEW6cBBYwChULJHv1OTCSeGEOgO5vAI_KVdsxPg9sw8oIXbNTZwyP7ZFyOgCYuufR3eFhUrD4w9VcMvlU1Wg",
+        "eyJhbGciOiJSUzI1NiIsImtpZCI6ImY4MDljZmYxMTZlNWJhNzQwNzQ1YmZlZGE1OGUxNmU4MmYzZmQ4MDUiLCJ0eXAiOiJKV1QifQ.eyJpc3MiOiJodHRwczovL3NlY3VyZXRva2VuLmdvb2dsZS5jb20vcGhvbmUtZmlyZWJhc2UtZTZhZTAiLCJhdWQiOiJwaG9uZS1maXJlYmFzZS1lNmFlMCIsImF1dGhfdGltZSI6MTY2OTEyOTM2MCwidXNlcl9pZCI6ImVRb1g3U2FUN1ZoQllobkU1RXlVVmtPMEl6bjEiLCJzdWIiOiJlUW9YN1NhVDdWaEJZaG5FNUV5VVZrTzBJem4xIiwiaWF0IjoxNjY5MTI5MzYwLCJleHAiOjE2NjkxMzI5NjAsInBob25lX251bWJlciI6Iis5MTkxMTA2Nzg4MzEiLCJmaXJlYmFzZSI6eyJpZGVudGl0aWVzIjp7InBob25lIjpbIis5MTkxMTA2Nzg4MzEiXX0sInNpZ25faW5fcHJvdmlkZXIiOiJwaG9uZSJ9fQ.f_JDP7yDsmFuGLZSeFuwmfGwuPhk_4xTwT7DssSFh58yAOhoxBJpnfFps0gllzcI7dPtt_YD_ygbKXQ6LeUbtDeq_00lza7fscArjD1icJ08REvGnC_ZozpZ8Y4yMZLIGX9GAwFGSa8HPtri1pRJ-CnFK-yz5h9FkD4BSfAxPrutGG52PKoUOiMhApt1uhJyd6zdL6d_4_SrOXiOzsVMM2TihK5kjioSPAIxCq_aBuE65aX7I_Yqmz6TGwxbbyasTlSDhUg4XqmXvD0qlD2DPFKHLjIqOLdnDyne3iv9TaCNHfKR7ea7sZKCSJpMqUFcNKpxIWyXJw3NMex0cmzcNw",
   };
-  //const MyApp({Key? key}) : super(key: key);
+  // //const MyApp({Key? key}) : super(key: key);
   Future<void> getdata() async {
     var future = await http.get(url, headers: headers);
     var responseData = json.decode(future.body);
-    print(responseData['username']);
+    print(responseData['uid']);
     name = responseData['username'];
     phone = responseData['phone'];
   }
@@ -44,6 +44,7 @@ class _MyAppState1 extends State<profile> {
   //     print(jsonData);
   //   } else {
   //     print("error");
+
   //   }
   //}
 
@@ -66,7 +67,9 @@ class _MyAppState1 extends State<profile> {
   //     print(e);
   //   }
   //}
+
   List<dynamic> _users = [];
+  // var name=name1;
 
   @override
   Widget build(BuildContext context) {
@@ -107,7 +110,7 @@ class _MyAppState1 extends State<profile> {
                         ),
                         SizedBox(width: 3),
                         Text(
-                          "${name}",
+                          name,
                           style: TextStyle(
                             fontWeight: FontWeight.w500,
                             fontSize: 20,
@@ -119,7 +122,7 @@ class _MyAppState1 extends State<profile> {
                     Row(
                       children: [
                         SizedBox(width: 30),
-                        Text("+91 ${phone}",
+                        Text("+91" + phone,
                             style: TextStyle(
                               fontWeight: FontWeight.w500,
                               fontSize: 17,
