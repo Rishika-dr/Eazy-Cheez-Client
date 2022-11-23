@@ -33,40 +33,6 @@ class _MyAppState1 extends State<profile> {
     name = responseData['username'];
     phone = responseData['phone'];
   }
-  // Future loadUserList() async {
-  //   String url = '127.0.0.1:8000/api/profile';
-  //   var res = await http.get(Uri.http(url), headers: {
-  //     'authtoken':
-  //         'eyJhbGciOiJSUzI1NiIsImtpZCI6ImQ3YjE5MTI0MGZjZmYzMDdkYzQ3NTg1OWEyYmUzNzgzZGMxYWY4OWYiLCJ0eXAiOiJKV1QifQ.eyJpc3MiOiJodHRwczovL3NlY3VyZXRva2VuLmdvb2dsZS5jb20vcGhvbmUtZmlyZWJhc2UtZTZhZTAiLCJhdWQiOiJwaG9uZS1maXJlYmFzZS1lNmFlMCIsImF1dGhfdGltZSI6MTY2ODUzMzYwNCwidXNlcl9pZCI6ImRmQjllcjAzQ1lZVE85aUJMakhXV2Z6RlZ4ODIiLCJzdWIiOiJkZkI5ZXIwM0NZWVRPOWlCTGpIV1dmekZWeDgyIiwiaWF0IjoxNjY4NTMzNjA0LCJleHAiOjE2Njg1MzcyMDQsInBob25lX251bWJlciI6Iis5MTYzNjIwOTg2MDYiLCJmaXJlYmFzZSI6eyJpZGVudGl0aWVzIjp7InBob25lIjpbIis5MTYzNjIwOTg2MDYiXX0sInNpZ25faW5fcHJvdmlkZXIiOiJwaG9uZSJ9fQ.BMKyCpD6nDRmpeCL1jJJlk5KEl6OhkmQUBidm7xFNBXpORZUuL5anApKZuoM3vcUuo2AfVHRcfqKXHOfFDgz_LhCeo1DO5_cctRtCeo5Q8gxCOGgMd9KpY6CSA4Fd9MpbbURylG6j7vQC-rmChMVigZsM3vH-9zdot-1mTdM2OA8fKUZLi1dLMb_sMMKSkeU0Yx9vFAV2yjIHyVlTCg835_GiDG4vhVl8bp5dasiZWD3KJBwYpYmwlgANgOBTE2zjmqGguTY_hk2osPoXLFYZo1SuMXN8QvVXTzRvU5AB52aTF20y5ABn-Uwf0RBStyoCnt3cxSNLjZK65N8oqefeA'
-  //   });
-  //   if (res.statusCode == 200) {
-  //     var jsonData = jsonDecode(res.body);
-  //     print(jsonData);
-  //   } else {
-  //     print("error");
-
-  //   }
-  //}
-
-  // final String baseUrl = "http://127.0.0.1:8000";
-  // Future getHttp() async {
-  //   final Dio dio = new Dio();
-  //   try {
-  //     var response = await dio.get(
-  //       "$baseUrl/api/profile",
-  //       options: Options(
-  //         headers: {
-  //           "authtoken":
-  //               "eyJhbGciOiJSUzI1NiIsImtpZCI6ImY4MDljZmYxMTZlNWJhNzQwNzQ1YmZlZGE1OGUxNmU4MmYzZmQ4MDUiLCJ0eXAiOiJKV1QifQ.eyJpc3MiOiJodHRwczovL3NlY3VyZXRva2VuLmdvb2dsZS5jb20vcGhvbmUtZmlyZWJhc2UtZTZhZTAiLCJhdWQiOiJwaG9uZS1maXJlYmFzZS1lNmFlMCIsImF1dGhfdGltZSI6MTY2ODY3MjU4MCwidXNlcl9pZCI6ImVRb1g3U2FUN1ZoQllobkU1RXlVVmtPMEl6bjEiLCJzdWIiOiJlUW9YN1NhVDdWaEJZaG5FNUV5VVZrTzBJem4xIiwiaWF0IjoxNjY4NjcyNTgwLCJleHAiOjE2Njg2NzYxODAsInBob25lX251bWJlciI6Iis5MTkxMTA2Nzg4MzEiLCJmaXJlYmFzZSI6eyJpZGVudGl0aWVzIjp7InBob25lIjpbIis5MTkxMTA2Nzg4MzEiXX0sInNpZ25faW5fcHJvdmlkZXIiOiJwaG9uZSJ9fQ.CNzMb4PZWUaqsTQ-L_TCRmJuEvulsPPnBW_mcFD-kj7OuFNqLnlwYqglVSpv1tZvjEBsscFy4K-DqtY8B8nZbF26I5NgLASOQCYjZqgDC9fwCs_gXAn0CtK8X2PIiYp1bcEog85e2OkG6gWK8eVZLNPmyMl2g2DjPiQ97lhTXdx5WOQxcuKAV2fa3-ugcakPdluZ9H0PK_RabGt6mEVOs-x6onHHU5XWZGnROI3Re9PHy9EPM46MAcY_XJBfH6-JdiR_ssWdx2Lsyc75se-SFo8cyfJirodJIcJzPtOjnxc_6Tccgeo9UneQLbnggq_hjc9bC5utnKkJ2eXP8Fxdog"
-  //         },
-  //       ),
-  //     );
-  //     print(response.statusCode);
-  //     print(response.data);
-  //   } catch (e) {
-  //     print(e);
-  //   }
-  //}
 
   List<dynamic> _users = [];
   // var name=name1;
@@ -414,89 +380,6 @@ class _MyAppState1 extends State<profile> {
           ],
         ),
       ),
-      // bottomNavigationBar: Container(
-      //   width: size.width * .945,
-      //   height: 80,
-      //   child: Row(
-      //     children: [
-      //       SizedBox(width: size.width * .04),
-      //       TextButton(
-      //         onPressed: () {},
-      //         child: Column(
-      //           children: [
-      //             SizedBox(height: 6),
-      //             Icon(Icons.widgets_outlined, color: Colors.black),
-      //             SizedBox(
-      //               height: 10,
-      //             ),
-      //             Text("home",
-      //                 style: TextStyle(
-      //                   color: Colors.black,
-      //                   fontWeight: FontWeight.bold,
-      //                 ))
-      //           ],
-      //         ),
-      //       ),
-      //       SizedBox(width: size.width * .09),
-      //       TextButton(
-      //         onPressed: () {},
-      //         child: Column(
-      //           children: [
-      //             SizedBox(height: 6),
-      //             Icon(Icons.table_rows, color: Colors.black),
-      //             SizedBox(
-      //               height: 10,
-      //             ),
-      //             Text("categories",
-      //                 style: TextStyle(
-      //                   color: Colors.black,
-      //                   fontWeight: FontWeight.bold,
-      //                 ))
-      //           ],
-      //         ),
-      //       ),
-      //       SizedBox(width: size.width * .09),
-      //       TextButton(
-      //         onPressed: () {},
-      //         child: Column(
-      //           children: [
-      //             SizedBox(height: 6),
-      //             Icon(Icons.person_pin, color: Colors.black),
-      //             SizedBox(
-      //               height: 10,
-      //             ),
-      //             Text("profile",
-      //                 style: TextStyle(
-      //                   color: Colors.black,
-      //                   fontWeight: FontWeight.bold,
-      //                 ))
-      //           ],
-      //         ),
-      //       ),
-      //       SizedBox(width: size.width * .09),
-      //       TextButton(
-      //         onPressed: () {
-      //           Navigator.push(
-      //               context, MaterialPageRoute(builder: (context) => MyApp1()));
-      //         },
-      //         child: Column(
-      //           children: [
-      //             SizedBox(height: 6),
-      //             Icon(Icons.shopping_cart_outlined, color: Colors.black),
-      //             SizedBox(
-      //               height: 10,
-      //             ),
-      //             Text("Cart",
-      //                 style: TextStyle(
-      //                   color: Colors.black,
-      //                   fontWeight: FontWeight.bold,
-      //                 ))
-      //           ],
-      //         ),
-      //       )
-      //     ],
-      //   ),
-      // ),
       bottomNavigationBar: Container(
         height: 70,
         decoration: BoxDecoration(
